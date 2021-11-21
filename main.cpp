@@ -5,13 +5,16 @@
 #include "Input_Validation_Extended.h"
 using namespace std; 
 
+// Team Class with team name, coach name, 
 class Team 
 {
   private:
     int score; 
     bool homeStatus; 
     string name; 
+    string city;
     string coachName; 
+  
   public:
       Team() //default constructor 
       {
@@ -21,10 +24,12 @@ class Team
       void setScore (int s) { score = s; }
       void setHomeStatus(bool hs) { homeStatus = hs; }
       void setName(string n) { name = n; }
+      void setCity(string c) { city = c; }
       void setCoachName(string sCN) { coachName = sCN; }
       int getScore() const { return score; }
       bool getHomeStatus() const { return homeStatus; }
       string getName() const { return name; }
+      string getCity() const { return city; }
       string getCoachName() const { return coachName; }
 };
 
@@ -34,28 +39,31 @@ class Scoreboard
     int half; 
     Team home; //object that is a member of another object
     Team visitor; 
+  
   public: 
     Scoreboard()
     {
       half = 0; 
     }  
+    
     void setHalf(int h) { half = h; }
     void setHome(Team hSet) { home = hSet; }
     void setVisitor(Team vSet) { visitor = vSet; }
     int getHalf() const { return half; }
     Team getHome() const { return home; }
     Team getVisitor() const { return visitor; }
+    
     void showScoreboard()
     {
       string color = ""; 
       string reset = "\x1b[0m";
       color = "\x1b[95m"; //magenta 
       string score = "\x1b[96;1m"; //score color blue
-      cout << color << "Football Scoreboard" << reset << endl; 
-      cout << home.getName() << "\t\t" << visitor.getName() << endl; 
-      cout << "\t" << score << home.getScore() << reset << "\t\t\t\t\t\t" << visitor.getScore() << endl; 
-      cout << score << home.getCoachName() << reset << setw(7) << "\t\t" << visitor.getCoachName() << endl; 
-      for(int i = 0; i < 47; i++) { cout << "*"; } cout << endl;
+      cout << color << "\t\t" << "Football Scoreboard" << reset << endl; 
+      cout << home.getCity() << " " << home.getName() << "\t\t" << visitor.getCity() << " " << visitor.getName() << endl; 
+      cout << "\t" << score << home.getScore() << reset << "\t\t\t\t\t\t" << score << visitor.getScore() << endl; 
+      cout << score << reset << home.getCoachName() << reset << setw(12) << "\t\t" << visitor.getCoachName() << endl; 
+      for(int i = 0; i < 47; i++) { cout << color << "*" << reset ; } cout << endl;
        
        //proces to show the home team status
        cout << "Current Home Team - \t"; 
@@ -84,20 +92,24 @@ int main()
   string newName = ""; 
   string userChoice = ""; 
   string newCoachName = ""; 
+  string newCity = " ";
+  
   int homeTeamQuestion = 0; 
   int newScore = 0; 
-
+  
   //Set the home team 
   tOne.setHomeStatus(true); //tOne is the Home Team now 
   
   // Default Team One 
-  tOne.setName("Dallas Cowboys");
+  tOne.setName("Cowboys");
+  tOne.setCity("Dallas");
   tOne.setCoachName("Mark M.");
 
   // Default Team two
   tTwo.setName("Patriots");
+  tTwo.setCity("New England");
   tTwo.setCoachName("Bill B.");
-
+  
   //add some initial data to s
   s.setHome(tOne); 
   s.setVisitor(tTwo); 
@@ -113,9 +125,11 @@ int main()
       cout << "B = Update Home Team Score" << endl; 
       cout << "C = Update Home Team Name" << endl; 
       cout << "D = Update Home Team Coach" << endl;
-      cout << "F = Update Vistior Team Name" << endl; 
-      cout << "G = Update Visitor Team Score" << endl; 
-      cout << "H = Update Visitor Coach Name" << endl;
+      cout << "F = Update Home Team City" << endl;
+      cout << "G = Update Vistior Team Name" << endl; 
+      cout << "H = Update Visitor Team Score" << endl; 
+      cout << "I = Update Visitor Coach" << endl;
+      cout << "J = Update Visitor City" << endl;
       cout << "E = Exit" << endl;
       cout << ">"; 
       cin >> userChoice; 
@@ -164,24 +178,38 @@ int main()
       }
       else if(userChoice == "F" || userChoice == "f")
       {
+          cout << "\nUpdate Home City" << endl; 
+          cout << "\nPlease enter the home city: "; 
+          cin >> newCity; 
+          tOne.setCity(newCity); 
+      }
+      else if(userChoice == "G" || userChoice == "g")
+      {
           cout << "\nUpdate Visitor Team Name Module" << endl; 
           cout << "\nPlease enter the visitor team Name: "; 
           cin >> newName; 
           tTwo.setName(newName); 
       }
-      else if(userChoice == "G" || userChoice == "g")
+      else if(userChoice == "H" || userChoice == "h")
       {
         cout << "\nUpdate Visitor Score Module" << endl; 
         cout << "\nPlease enter a new score for the visitor team: "; 
         cin >> newScore; 
         tTwo.setScore(newScore);  //set the new score for tOne        
       }
-      else if(userChoice == "H" || userChoice == "h")
+      else if(userChoice == "I" || userChoice == "i")
       {
           cout << "\nUpdate Visitor Coach Module" << endl; 
           cout << "\nPlease enter the visitor coach Name: "; 
           cin >> newCoachName; 
           tTwo.setCoachName(newCoachName); 
+      }
+      else if(userChoice == "J" || userChoice == "j")
+      {
+          cout << "\nUpdate visitor City" << endl; 
+          cout << "\nPlease enter the visitor city: "; 
+          cin >> newCity; 
+          tTwo.setCity(newCity); 
       }
       
       else if(userChoice == "E" || userChoice == "e")
