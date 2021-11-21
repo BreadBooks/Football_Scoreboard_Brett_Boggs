@@ -11,16 +11,12 @@ class Team
     int score; 
     bool homeStatus; 
     string name; 
-   
     string coachName; 
   public:
       Team() //default constructor 
       {
         score = 0; 
         homeStatus = false; //visitor = false, home = true
-        // name = "DefaultTeamName"; 
-        
-        // coachName = "DefaultCoachName"; 
       }
       void setScore (int s) { score = s; }
       void setHomeStatus(bool hs) { homeStatus = hs; }
@@ -53,8 +49,8 @@ class Scoreboard
     {
       string color = ""; 
       string reset = "\x1b[0m";
-      color = "\x1b[35m"; //magenta 
-      string score = "\x1b[36;1m"; //score color 
+      color = "\x1b[95m"; //magenta 
+      string score = "\x1b[96;1m"; //score color blue
       cout << color << "Football Scoreboard" << reset << endl; 
       cout << home.getName() << "\t\t" << visitor.getName() << endl; 
       cout << "\t" << score << home.getScore() << reset << "\t\t\t\t\t\t" << visitor.getScore() << endl; 
@@ -94,7 +90,6 @@ int main()
   //Set the home team 
   tOne.setHomeStatus(true); //tOne is the Home Team now 
   
-
   // Default Team One 
   tOne.setName("Dallas Cowboys");
   tOne.setCoachName("Mark M.");
@@ -107,11 +102,11 @@ int main()
   s.setHome(tOne); 
   s.setVisitor(tTwo); 
 
-  //Loop this to make it an interactive menu
+ 
 
   do 
   {
-      system("clear"); //clear the screen of previous content 
+      system("clear"); 
       s.showScoreboard(); //show the current scoreboard data
       //menu choices 
       cout << "A = Update Home Status" << endl; 
@@ -128,8 +123,7 @@ int main()
       {
         cout << "\nUpdate Home Status Module****" << endl; 
         cout << "\nWho is the current home team: 1 = Team 1, 2 = Team 2: "; 
-        homeTeamQuestion = validateInt(homeTeamQuestion); 
-       // cin >> homeTeamQuestion; 
+        homeTeamQuestion = validateInt(homeTeamQuestion);
         if(homeTeamQuestion == 1)
         {
           tOne.setHomeStatus(true); 
@@ -148,15 +142,14 @@ int main()
       }
       else if(userChoice == "B" || userChoice == "b")
       {
-        cout << "\nUpdate Home Score Module****" << endl; 
+        cout << "\nUpdate Home Score Module" << endl; 
         cout << "\nPlease enter a new score for the home team: "; 
         cin >> newScore; 
         tOne.setScore(newScore);  //set the new score for tOne        
       }
      else if(userChoice == "C" || userChoice == "c")
       {
-        //Dr_T challenge Accept a new name for s's home team
-        cout << "****Update Home Team module*** " << endl; 
+        cout << "Update Home Team module" << endl; 
         cout << "\nPlease enter a new name for the home team: ";
         cin >> newName; 
         //change that home team's default name
@@ -164,28 +157,28 @@ int main()
       }
       else if(userChoice == "D" || userChoice == "d")
       {
-          cout << "\nUpdate Home Coach Module****" << endl; 
+          cout << "\nUpdate Home Coach Module" << endl; 
           cout << "\nPlease enter the home coach Name: "; 
           cin >> newCoachName; 
           tOne.setCoachName(newCoachName); 
       }
       else if(userChoice == "F" || userChoice == "f")
       {
-          cout << "\nUpdate Visitor Team Name Module****" << endl; 
+          cout << "\nUpdate Visitor Team Name Module" << endl; 
           cout << "\nPlease enter the visitor team Name: "; 
           cin >> newName; 
           tTwo.setName(newName); 
       }
       else if(userChoice == "G" || userChoice == "g")
       {
-        cout << "\nUpdate Visitor Score Module****" << endl; 
+        cout << "\nUpdate Visitor Score Module" << endl; 
         cout << "\nPlease enter a new score for the visitor team: "; 
         cin >> newScore; 
         tTwo.setScore(newScore);  //set the new score for tOne        
       }
       else if(userChoice == "H" || userChoice == "h")
       {
-          cout << "\nUpdate Visitor Coach Module****" << endl; 
+          cout << "\nUpdate Visitor Coach Module" << endl; 
           cout << "\nPlease enter the visitor coach Name: "; 
           cin >> newCoachName; 
           tTwo.setCoachName(newCoachName); 
