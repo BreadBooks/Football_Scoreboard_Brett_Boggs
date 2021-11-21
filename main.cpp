@@ -1,3 +1,6 @@
+// Football Scoreboard Brett Boggs 
+// Dr. T COSC-1437 
+// Due Date: 11/20/2021
 #include <iostream>
 #include <string> 
 #include <iomanip>
@@ -5,7 +8,7 @@
 #include "Input_Validation_Extended.h"
 using namespace std; 
 
-// Team Class with team name, coach name, 
+// Team Class with team name, coach name, city name, score, & home status
 class Team 
 {
   private:
@@ -54,7 +57,7 @@ class Scoreboard
     Team getVisitor() const { return visitor; }
     
     void showScoreboard()
-    {
+    { 
       string color = ""; 
       string reset = "\x1b[0m";
       color = "\x1b[95m"; //magenta 
@@ -84,8 +87,29 @@ class Scoreboard
     }
 };
 
-int main() 
+
+int minutes = 15;
+int seconds = 0;
+
+void displayClock()
 {
+    system("clear");
+    cout  << "        TIMER\n";
+    cout  << "------------------\n";
+    cout << "| " << setw(2) << minutes << " min | ";
+    cout << setw(2) << seconds << " sec |" << endl;
+    cout << "------------------\n";
+}
+
+void timer(){
+  
+    displayClock();
+    
+    
+};
+
+int main() 
+{ 
   Scoreboard s;
   Team tOne;
   Team tTwo; 
@@ -119,7 +143,9 @@ int main()
   do 
   {
       system("clear"); 
-      s.showScoreboard(); //show the current scoreboard data
+      timer();
+      s.showScoreboard();
+     //show the current scoreboard data
       //menu choices 
       cout << "A = Update Home Status" << endl; 
       cout << "B = Update Home Team Score" << endl; 
